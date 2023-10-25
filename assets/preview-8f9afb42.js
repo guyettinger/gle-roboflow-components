@@ -1,0 +1,2 @@
+import{J as o,G as r}from"./index-2384fde8.js";import"./styled-components.browser.esm-5c00f201.js";import"./index-76fb7be0.js";import"./_commonjsHelpers-de833af9.js";import"./index-d3ea75b5.js";const i={parameters:{actions:{argTypesRegex:"^on[A-Z].*"},controls:{matchers:{color:/(background|color)$/i,date:/Date$/}}}},p=Object.assign({},o),m=[r];export{m as decorators,i as default,p as globalTypes};
+//# sourceMappingURL=preview-8f9afb42.js.map
