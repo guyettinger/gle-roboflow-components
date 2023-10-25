@@ -122,7 +122,7 @@ export const RoboflowWebcam = forwardRef<Webcam, RoboflowWebcamProps>((
                 // set video input modes initialized
                 console.log("initialized video")
                 setVideoInitialized(true)
-                onInitialized()
+                onInitialized?.()
             }
 
             // done initializing
@@ -147,7 +147,7 @@ export const RoboflowWebcam = forwardRef<Webcam, RoboflowWebcamProps>((
         if (video.width !== videoWidth || video.height !== videoHeight) {
             video.width = videoWidth
             video.height = videoHeight
-            onSizeChange(videoWidth, videoHeight)
+            onSizeChange?.(videoWidth, videoHeight)
         }
     }
 
