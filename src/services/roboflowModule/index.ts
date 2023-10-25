@@ -9,3 +9,4 @@ export {
     type RoboflowBoundingBox,
     type RoboflowObjectDetection
 } from './roboflowModuleService.types'
+export { waitForRoboflowModule, initializeRoboflowApi } from './roboflowModuleService'
