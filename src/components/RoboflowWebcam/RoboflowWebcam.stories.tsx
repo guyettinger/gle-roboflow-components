@@ -24,7 +24,7 @@ const WebcamContainer = styled.div`
 const StoryTemplate = (args: RoboflowWebcamProps) => {
     return (
         <WebcamContainer>
-            <RoboflowWebcam/>
+            <RoboflowWebcam {...args}/>
         </WebcamContainer>
     )
 };
@@ -33,4 +33,11 @@ export const Default: Story = (args: RoboflowWebcamProps) => (
     <StoryTemplate {...args}/>
 );
 Default.args = {
+};
+
+export const Mirrored: Story = (args: RoboflowWebcamProps) => (
+    <StoryTemplate {...args}/>
+);
+Mirrored.args = {
+    mirrored: true
 };

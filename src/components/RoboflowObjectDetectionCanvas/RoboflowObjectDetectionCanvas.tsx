@@ -17,7 +17,8 @@ export const RoboflowObjectDetectionCanvas = (
     {
         width,
         height,
-        objectDetections
+        objectDetections,
+        mirrored = false
     }: RoboflowObjectDetectionCanvasProps) => {
     const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -66,6 +67,10 @@ export const RoboflowObjectDetectionCanvas = (
             if (row.confidence < 0) return
 
             //dimensions
+            if(mirrored){
+                row.x = width - row.x
+            }
+
             let x = row.x - row.width / 2
             let y = row.y - row.height / 2
             let w = row.width
