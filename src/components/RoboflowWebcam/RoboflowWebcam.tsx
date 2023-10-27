@@ -42,6 +42,7 @@ const RoboflowWebcamLabel = styled.span`
 export const RoboflowWebcam = forwardRef<Webcam, RoboflowWebcamProps>((
     {
         children,
+        mirrored = false,
         onInitialized,
         onSizeChange
     }, ref) => {
@@ -205,6 +206,7 @@ export const RoboflowWebcam = forwardRef<Webcam, RoboflowWebcamProps>((
                     muted={true}
                     width={constraintWidth}
                     height={constraintHeight}
+                    mirrored={mirrored}
                     videoConstraints={videoConstraints}
                 />
                 {children}
