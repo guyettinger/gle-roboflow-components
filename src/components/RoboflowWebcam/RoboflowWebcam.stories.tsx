@@ -21,23 +21,23 @@ const WebcamContainer = styled.div`
   margin: 1rem 0;
 `
 
-const StoryTemplate = (args: RoboflowWebcamProps) => {
+export const Default: Story = (args: RoboflowWebcamProps) => {
     return (
         <WebcamContainer>
-            <RoboflowWebcam {...args}/>
+            <RoboflowWebcam/>
         </WebcamContainer>
     )
 };
-
-export const Default: Story = (args: RoboflowWebcamProps) => (
-    <StoryTemplate {...args}/>
-);
 Default.args = {
 };
 
-export const Mirrored: Story = (args: RoboflowWebcamProps) => (
-    <StoryTemplate {...args}/>
-);
+export const Mirrored: Story = (args: RoboflowWebcamProps) => {
+    return (
+        <WebcamContainer>
+            <RoboflowWebcam mirrored={args.mirrored}/>
+        </WebcamContainer>
+    )
+};
 Mirrored.args = {
     mirrored: true
 };

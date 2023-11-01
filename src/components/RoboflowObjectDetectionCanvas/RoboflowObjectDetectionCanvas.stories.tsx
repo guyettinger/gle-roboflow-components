@@ -19,23 +19,24 @@ const CanvasContainer = styled.div`
   align-items: center;
   flex-direction: column;
   margin: 1rem 0;
+
   canvas {
     position: relative;
     background-color: #1D1E20;
   }
 `
 
-const StoryTemplate = (args: RoboflowObjectDetectionCanvasProps) => {
+export const Default: Story = (args: RoboflowObjectDetectionCanvasProps) => {
     return (
         <CanvasContainer>
-            <RoboflowObjectDetectionCanvas {...args}/>
+            <RoboflowObjectDetectionCanvas
+                width={args.width}
+                height={args.height}
+                objectDetections={args.objectDetections}
+            />
         </CanvasContainer>
     )
 };
-
-export const Default: Story = (args: RoboflowObjectDetectionCanvasProps) => (
-    <StoryTemplate {...args}/>
-);
 Default.args = {
     width: 640,
     height: 480,
@@ -72,9 +73,18 @@ Default.args = {
     }]
 };
 
-export const Mirrored: Story = (args: RoboflowObjectDetectionCanvasProps) => (
-    <StoryTemplate {...args}/>
-);
+export const Mirrored: Story = (args: RoboflowObjectDetectionCanvasProps) => {
+    return (
+        <CanvasContainer>
+            <RoboflowObjectDetectionCanvas
+                mirrored={args.mirrored}
+                width={args.width}
+                height={args.height}
+                objectDetections={args.objectDetections}
+            />
+        </CanvasContainer>
+    )
+};
 Mirrored.args = {
     mirrored: true,
     width: 640,
