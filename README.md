@@ -10,7 +10,59 @@ A React Roboflow component library.
 
 ## Example
 ```tsx
-export const Example = ({exampleDetectionModel, exampleDetectionModelVersion}: ExampleProps) => {
+import { useEffect, useRef, useState } from "react";
+import Webcam from "react-webcam";
+import styled from "styled-components";
+import {
+    RoboflowApiProvider,
+    RoboflowAuthParams,
+    RoboflowClientProvider,
+    RoboflowLoadParams,
+    RoboflowModel,
+    RoboflowObjectDetection,
+    RoboflowObjectDetectionCanvas,
+    RoboflowWebcam,
+    useRoboflowClientContext,
+    waitForRoboflowModule
+} from "gle-roboflow-components"
+
+// Roboflow authorization
+const PUBLISHABLE_ROBOFLOW_API_KEY = "<your_roboflow_publishable_api_key>"
+const roboflowAuthParams: RoboflowAuthParams = {
+    publishable_key: PUBLISHABLE_ROBOFLOW_API_KEY
+}
+
+// Detection model
+const exampleDetectionModel = "<roboflow_model_name>"
+const exampleDetectionModelVersion = "<roboflow_model_version>"
+
+// Example Component
+const ExampleContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 1rem 0;
+`
+
+const ExampleContent = styled.div`
+  position: relative;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  background-color: #1D1E20;
+  border-radius: 4px;
+`
+
+const ExampleVideoContent = styled.div`
+  position: relative;
+`
+
+interface ExampleProps {
+    exampleDetectionModel: string,
+    exampleDetectionModelVersion: string
+}
+
+const Example = ({exampleDetectionModel, exampleDetectionModelVersion}: ExampleProps) => {
     const webcamRef = useRef<Webcam>(null)
     const [objectDetections, setObjectDetections] = useState<RoboflowObjectDetection[]>([])
     const [webcamInitialized, setWebcamInitialized] = useState<boolean>(false)
@@ -66,21 +118,62 @@ export const Example = ({exampleDetectionModel, exampleDetectionModelVersion}: E
     }
 
     return (
-        <RoboflowWebcam
-            ref={webcamRef}
-            onInitialized={handleRoboflowWebcamInitialized}
-            onSizeChange={handleRoboflowWebcamSizeChange}
-        >
-            {isReadyForCanvas &&
-                <RoboflowObjectDetectionCanvas
-                    width={webcamWidth}
-                    height={webcamHeight}
-                    objectDetections={objectDetections}
-                />
-            }
-        </RoboflowWebcam>
+        <ExampleContainer>
+            <ExampleContent>
+                <ExampleVideoContent>
+                    <RoboflowWebcam
+                        ref={webcamRef}
+                        onInitialized={handleRoboflowWebcamInitialized}
+                        onSizeChange={handleRoboflowWebcamSizeChange}
+                    >
+                        {isReadyForCanvas &&
+                            <RoboflowObjectDetectionCanvas
+                                width={webcamWidth}
+                                height={webcamHeight}
+                                objectDetections={objectDetections}
+                            />
+                        }
+                    </RoboflowWebcam>
+                </ExampleVideoContent>
+            </ExampleContent>
+        </ExampleContainer>
     )
 }
+
+// Example App
+const ExampleAppContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 10%
+`
+
+const ExampleApp = () => {
+    const [roboflowReady, setRoboflowReady] = useState(false)
+
+    useEffect(() => {
+        waitForRoboflowModule().then(() => {
+            setRoboflowReady(true)
+        })
+    }, []);
+
+    return (
+        <ExampleAppContent>
+            {roboflowReady &&
+                <RoboflowApiProvider roboflowAuthParams={roboflowAuthParams}>
+                    <RoboflowClientProvider>
+                        <Example exampleDetectionModel={exampleDetectionModel}
+                                 exampleDetectionModelVersion={exampleDetectionModelVersion}
+                        />
+                    </RoboflowClientProvider>
+                </RoboflowApiProvider>
+            }
+            {!roboflowReady &&
+                <span>loading...</span>
+            }
+        </ExampleAppContent>
+    )
+}
+
 
 ```
 
