@@ -208,6 +208,7 @@ export const RoboflowWebcam = forwardRef<Webcam, RoboflowWebcamProps>((
                     height={constraintHeight}
                     mirrored={mirrored}
                     videoConstraints={videoConstraints}
+                    screenshotFormat={'image/jpeg'}
                 />
                 {children}
             </RoboflowWebcamVideoContent>
