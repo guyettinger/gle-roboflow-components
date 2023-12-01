@@ -5,10 +5,13 @@
 # GLE Roboflow Component Library
 A React Roboflow component library.
 
-## Documentation
-[Storybook](https://guyettinger.github.io/gle-roboflow-components/)
+[![Version](https://img.shields.io/npm/v/gle-roboflow-components?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/gle-roboflow-components)
+[![Downloads](https://img.shields.io/npm/dt/gle-roboflow-components.svg?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/gle-roboflow-components)
 
-## Example
+## Documentation
+- [Storybook](https://guyettinger.github.io/gle-roboflow-components/)
+
+## Usage
 ```tsx
 import { useEffect, useRef, useState } from "react";
 import Webcam from "react-webcam";
